@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_pdxy_cccs",
+  "info": {
+    "displayName": "ccc",
+    "icon": "car"
+  },
+  "options": {},
+  "attributes": {
+    "ccy": {
+      "type": "string"
+    }
+  }
+}

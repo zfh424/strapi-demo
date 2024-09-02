@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "data_sources",
+  "info": {
+    "singularName": "data-source",
+    "pluralName": "data-sources",
+    "displayName": "DataSource"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "database",
+        "api",
+        "file",
+        "streaming"
+      ],
+      "required": true
+    },
+    "connectionDetails": {
+      "type": "json"
+    },
+    "datasets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dataset.dataset"
+    }
+  }
+}

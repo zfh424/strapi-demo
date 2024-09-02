@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "datasets",
+  "info": {
+    "singularName": "dataset",
+    "pluralName": "datasets",
+    "displayName": "Dataset"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "fields": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::data-field.data-field"
+    },
+    "source": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::data-source.data-source"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::owner.owner"
+    },
+    "lastUpdated": {
+      "type": "datetime"
+    },
+    "tags": {
+      "type": "json"
+    }
+  }
+}

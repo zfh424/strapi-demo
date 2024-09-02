@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "data_fields",
+  "info": {
+    "singularName": "data-field",
+    "pluralName": "data-fields",
+    "displayName": "DataField"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "string",
+        "integer",
+        "float",
+        "boolean",
+        "date",
+        "datetime"
+      ],
+      "required": true
+    },
+    "isRequired": {
+      "type": "boolean",
+      "default": false
+    },
+    "dataset": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::dataset.dataset"
+    }
+  }
+}

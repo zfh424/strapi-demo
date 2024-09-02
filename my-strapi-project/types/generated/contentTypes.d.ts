@@ -788,6 +788,284 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiArticleArticle extends Schema.CollectionType {
+  collectionName: 'article';
+  info: {
+    singularName: 'article';
+    pluralName: 'articles';
+    displayName: 'Article';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required & Attribute.DefaultTo<'22'>;
+    content: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    parentCategory: Attribute.Relation<
+      'api::category.category',
+      'manyToOne',
+      'api::category.category'
+    >;
+    childCategories: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::category.category'
+    >;
+    datasets: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::dataset.dataset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDataFieldDataField extends Schema.CollectionType {
+  collectionName: 'data_fields';
+  info: {
+    singularName: 'data-field';
+    pluralName: 'data-fields';
+    displayName: 'DataField';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    type: Attribute.Enumeration<
+      ['string', 'integer', 'float', 'boolean', 'date', 'datetime']
+    > &
+      Attribute.Required;
+    isRequired: Attribute.Boolean & Attribute.DefaultTo<false>;
+    dataset: Attribute.Relation<
+      'api::data-field.data-field',
+      'manyToOne',
+      'api::dataset.dataset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::data-field.data-field',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::data-field.data-field',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDataSourceDataSource extends Schema.CollectionType {
+  collectionName: 'data_sources';
+  info: {
+    singularName: 'data-source';
+    pluralName: 'data-sources';
+    displayName: 'DataSource';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    type: Attribute.Enumeration<['database', 'api', 'file', 'streaming']> &
+      Attribute.Required;
+    connectionDetails: Attribute.JSON;
+    datasets: Attribute.Relation<
+      'api::data-source.data-source',
+      'oneToMany',
+      'api::dataset.dataset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::data-source.data-source',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::data-source.data-source',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDatasetDataset extends Schema.CollectionType {
+  collectionName: 'datasets';
+  info: {
+    singularName: 'dataset';
+    pluralName: 'datasets';
+    displayName: 'Dataset';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    fields: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToMany',
+      'api::data-field.data-field'
+    >;
+    source: Attribute.Relation<
+      'api::dataset.dataset',
+      'manyToOne',
+      'api::data-source.data-source'
+    >;
+    category: Attribute.Relation<
+      'api::dataset.dataset',
+      'manyToOne',
+      'api::category.category'
+    >;
+    owner: Attribute.Relation<
+      'api::dataset.dataset',
+      'manyToOne',
+      'api::owner.owner'
+    >;
+    lastUpdated: Attribute.DateTime;
+    tags: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDatatreeDatatree extends Schema.CollectionType {
+  collectionName: 'datatrees';
+  info: {
+    singularName: 'datatree';
+    pluralName: 'datatrees';
+    displayName: 'datatree';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    code: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::datatree.datatree',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::datatree.datatree',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOwnerOwner extends Schema.CollectionType {
+  collectionName: 'owners';
+  info: {
+    singularName: 'owner';
+    pluralName: 'owners';
+    displayName: 'Owner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    email: Attribute.Email & Attribute.Required;
+    department: Attribute.String;
+    datasets: Attribute.Relation<
+      'api::owner.owner',
+      'oneToMany',
+      'api::dataset.dataset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +1084,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::article.article': ApiArticleArticle;
+      'api::category.category': ApiCategoryCategory;
+      'api::data-field.data-field': ApiDataFieldDataField;
+      'api::data-source.data-source': ApiDataSourceDataSource;
+      'api::dataset.dataset': ApiDatasetDataset;
+      'api::datatree.datatree': ApiDatatreeDatatree;
+      'api::owner.owner': ApiOwnerOwner;
     }
   }
 }

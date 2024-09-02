@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_commfiled_",
+  "info": {
+    "displayName": "日常字段",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "Nmae": {
+      "type": "string"
+    }
+  }
+}
